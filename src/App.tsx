@@ -75,7 +75,7 @@ export default function App() {
         }
       }
       fetchData();
-    }, [queryParams.page]);
+    }, [queryParams]);
     return (
       <>
           <Nav
