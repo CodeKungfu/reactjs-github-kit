@@ -1,4 +1,5 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
+import {Icon} from '@/components/Icon';
 export function Loading({load, loadMore}) {
     const loadingRef = useRef();
     const handleIntersection = (entries) => {
@@ -23,7 +24,7 @@ export function Loading({load, loadMore}) {
     return (
         <>
             <div ref={loadingRef} style={{ display: load ? 'block' : 'none' }} className='text-center'>
-                <i className="fa-solid fa-spinner text-blue-600 text-5xl"></i>
+                <Icon className="fa-solid fa-spinner text-blue-600 text-5xl"></Icon>
             </div>
         </>
         

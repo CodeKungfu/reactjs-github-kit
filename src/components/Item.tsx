@@ -1,4 +1,5 @@
 import { Avatar } from "./Avatar";
+import {Icon} from '@/components/Icon';
 
 export function Item(props) {
     const item = props.data;
@@ -25,27 +26,27 @@ export function Item(props) {
               </a>
             </div>
             <div className="flex items-center mb-2">
-              <i className="fa-solid fa-user text-orange-400"></i>
+              <Icon className="fa-solid fa-user text-orange-400"></Icon>
               <div className="ml-2 flex-auto text-xs truncate">
                 {item.owner.login}
               </div>
             </div>
             <div className="flex items-center mb-2">
-              <i className="fa-solid fa-star text-yellow-400"></i>
+              <Icon className="fa-solid fa-star text-yellow-400"></Icon>
               <div className="ml-2 flex-auto text-xs truncate">
                 <span className="font-bold mr-1">{item.stargazers_count}</span>
                 stars
               </div>
             </div>
             <div className="flex items-center mb-2">
-              <i className="fa-solid fa-code-fork text-blue-400"></i>
+              <Icon className="fa-solid fa-code-fork text-blue-400"></Icon>
               <div className="ml-2 flex-auto text-xs truncate">
                 <span className="font-bold mr-1">{item.forks_count}</span>
                 forks
               </div>
             </div>
             <div className="flex items-center">
-              <i className="fa-solid fa-triangle-exclamation text-red-400"></i>
+              <Icon className="fa-solid fa-triangle-exclamation text-red-400"></Icon>
               <div className="ml-2 flex-auto text-xs truncate">
                 <span className="font-bold mr-1">{item.open_issues}</span>
                 open issues

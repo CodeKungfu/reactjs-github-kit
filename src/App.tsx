@@ -1,7 +1,5 @@
 import { Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Link, Routes } from 'react-router-dom';
-// import Home from "@/pages/home/index";
-// import Battle from "@/pages/battle/index";
 const Home = lazy(() => import('@/pages/home/index'));
 const Battle = lazy(() => import('@/pages/battle/index'));
 

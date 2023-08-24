@@ -1,4 +1,5 @@
 import { Avatar } from './Avatar';
+import {Icon} from '@/components/Icon';
 
 export function UserCard(props) {
     return (
@@ -25,25 +26,25 @@ export function UserCard(props) {
                         </a>
                     </div>
                     <div className="flex items-center mb-2">
-                        {/* <MyIcon name="location" /> */}
+                        <Icon className="fa-solid fa-location-arrow text-stone-800"></Icon>
                         <div className="ml-2 flex-auto text-xs truncate">
                             {props.data.location}
                         </div>
                     </div>
                     <div className="flex items-center mb-2">
-                        {/* <MyIcon name="users" /> */}
+                        <Icon className="fa-solid fa-users text-stone-800"></Icon>
                         <div className="ml-2 flex-auto text-xs truncate">
                             {props.data.followers}
                         </div>
                     </div>
                     <div className="flex items-center mb-2">
-                        {/* <MyIcon name="following" /> */}
+                        <Icon className="fa-solid fa-user-plus text-stone-800"></Icon>
                         <div className="ml-2 flex-auto text-xs truncate">
                             {props.data.following}
                         </div>
                     </div>
                     <div className="flex items-center">
-                        {/* <MyIcon name="code" /> */}
+                        <Icon className="fa-solid fa-code text-stone-800"></Icon>
                         <div className="ml-2 flex-auto text-xs truncate">
                             {props.data.public_repos}
                         </div>
