@@ -8,7 +8,13 @@ module.exports = {
   entry: './src/index.tsx', // 入口 js 文件，可以配置多个 entry
   output: {
     path: path.resolve(__dirname, 'dist'), // 输出路径
-    filename: '[name].[chunkhash].js', // 输出文件名，具有一定动态性，如可配置成 [name].[chunkhash].js，其会被替换为名称和一个文件哈希值（以保证浏览器会重新加载，但这需要相关 plugin 去支持，后面再详述）
+    chunkFilename: 'js/[name].[chunkhash:6].chunk.js',
+    filename: '[name].[chunkhash:6].js', // 输出文件名，具有一定动态性，如可配置成 [name].[chunkhash].js，其会被替换为名称和一个文件哈希值（以保证浏览器会重新加载，但这需要相关 plugin 去支持，后面再详述）
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   resolve: {
     // webpack 将识别这些后缀文件为 module

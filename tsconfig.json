@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "moduleResolution": "node",
+    "module": "esnext",
     "esModuleInterop": true,
     "lib": [ "es2018", "dom" ],
     "jsx": "react-jsx",

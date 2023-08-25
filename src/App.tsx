@@ -1,7 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Link, Routes } from 'react-router-dom';
-const Home = lazy(() => import('@/pages/home/index'));
-const Battle = lazy(() => import('@/pages/battle/index'));
+const Home = lazy(() => import(/*webpackChunkName: 'home-page' */ '@/pages/home/index'));
+const Battle = lazy(() => import(/*webpackChunkName: 'battle-page' */ '@/pages/battle/index'));
 
 export default function App() {
     return (
