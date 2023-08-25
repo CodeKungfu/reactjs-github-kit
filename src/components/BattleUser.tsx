@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
+import {Icon} from './Icon';
+
 export function BattleUser({ title, onSubmitUser }) {
     const [username, setUsername] = useState<string>('');
     const [isChecked, setIsChecked] = useState<boolean>(false);
@@ -57,7 +59,9 @@ export function BattleUser({ title, onSubmitUser }) {
                         className="block w-full rounded-md border-0 py-1.5 pl-4 pr-6 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         placeholder="Github Username"
                     ></input>
-                    {isChecked && <div className="absolute right-2 top-2.5 text-green-600">checkcheckcheckcheckcheckcheck</div>}
+                    {isChecked && <div className="absolute right-2 top-2.5 text-green-600">
+                        <Icon className="fa-solid fa-check text-green-600"></Icon>
+                        </div>}
                 </div>
                 <button
                     type="button"

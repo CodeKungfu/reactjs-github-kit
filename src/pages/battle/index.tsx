@@ -25,6 +25,12 @@ export default function Battle() {
         window.history.replaceState({}, "", "/battle");
     }
     useEffect(() => {
+        if (!githubUserOne || !githubUserTwo) {
+            setShowBattleResult(false);
+            window.history.replaceState({}, "", "/battle");
+        }
+    }, []);
+    useEffect(() => {
         if (githubUserOne && githubUserTwo) {
             setShowBattleResult(true);
             window.history.replaceState({}, "", `?userOne=${githubUserOne}&userTwo=${githubUserTwo}`);
