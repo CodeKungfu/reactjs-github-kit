@@ -1,6 +1,6 @@
 import { Item } from "./Item";
 import { Load } from "./Load";
-import { Loading } from "./Loading";
+import { InfinityLoad } from "./InfinityLoad";
 
 export function List({load, items, loadMore, total}) {
     if (load && items.length === 0) {
@@ -25,7 +25,7 @@ export function List({load, items, loadMore, total}) {
             );
           })}
         </div>
-        <Loading
+        <InfinityLoad
           load={items.length != 0 && items.length < total}
           loadMore={loadMore}
         />
