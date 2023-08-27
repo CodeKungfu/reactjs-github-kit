@@ -2,7 +2,7 @@ import { Item } from "./Item";
 import { Load } from "./Load";
 import { InfinityLoad } from "./InfinityLoad";
 
-export function List({load, items, loadMore, total}) {
+export function List({load, items, loadMore, total, error}) {
     if (load && items.length === 0) {
       return <Load load={load} />;
     }
@@ -26,7 +26,7 @@ export function List({load, items, loadMore, total}) {
           })}
         </div>
         <InfinityLoad
-          load={items.length != 0 && items.length < total}
+          load={items.length != 0 && items.length < total && !error}
           loadMore={loadMore}
         />
       </>

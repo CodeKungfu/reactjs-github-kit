@@ -1,5 +1,4 @@
 import { useRef, useState, useEffect } from 'react';
-import axios from 'axios';
 import { Nav } from "@/components/Nav";
 import { List } from "@/components/List";
 import { Modal } from "@/components/Modal";
@@ -14,36 +13,50 @@ export default function Home() {
       language: getUrlLanguage()
     });
     const cacheGithubRes = useRef({});
-  
-    const [error, setError] = useState('');
-    const getHotGithubRes = async (language, page) => {
-      const url = getRequestUrl(language, page);
-      try {
-        const res = await axios.get(url)
-        if (page === 1) {
-          setHotGithubRes(res.data.items);
-          if (cacheGithubRes.current) {
-            cacheGithubRes.current[language]=res.data.items;
-          }
-        } else {
-          setHotGithubRes([...hotGithubRes, ...res.data.items]);
-        }
-        setTotal(res.data.total_count);
-      } catch (error) {
-        // console.log(error);
-        setError(error.message);
-      }
-    };
-  
+    const [error, setError] = useState('');  
     const onChange = (language) => {
       setError(null);
-      setLoading(true);
-      setHotGithubRes([]);
       setQueryParams({
         language,
         page: 1,
       });
+      const storageRepos = cacheGithubRes.current?.[language] || [];
+      if (storageRepos.length > 0) {
+        setHotGithubRes(storageRepos);
+      } else {
+        setHotGithubRes([]);
+        getGithubData(language, 1);
+      }
       window.history.replaceState({}, "", `index.html?language=${language}`);
+    };
+
+    useEffect(() => {
+      getGithubData(queryParams.language, queryParams.page);
+    }, []);
+
+    const getGithubData = (lang: string, page: number) => {
+      setLoading(true);
+      setError(null);
+      const url = getRequestUrl(lang, page);
+      fetch(url)
+        .then((res) => (res.ok ? res.json() : Promise.reject(res)))
+        .then((data) => {
+          const items = data?.items || [];
+          const newItems = page === 1 ? items : [...hotGithubRes, ...items];
+          setHotGithubRes(newItems);
+          if (page === 1) {
+            if (cacheGithubRes.current) {
+              cacheGithubRes.current[lang]=newItems;
+            }
+          }
+          setTotal(data?.total_count || 0);
+        })
+        .catch((error) => {
+          error.json().then((err: any) => {
+            setError(err?.message || "Error");
+          });
+        })
+        .finally(() => setLoading(false));
     };
   
     const fetchNext = () => {
@@ -53,29 +66,12 @@ export default function Home() {
       if (error) {
         return;
       }
-      console.log(queryParams.page);
-      const thisQueryParams = {
-        ...queryParams
-      };
       setQueryParams({
         ...queryParams,
-        page: thisQueryParams.page + 1,
+        page: queryParams.page + 1,
       });
-      console.log(queryParams.page);
+      getGithubData(queryParams.language, queryParams.page + 1);
     }
-  
-    useEffect(() => {
-      async function fetchData() {
-        const cache = cacheGithubRes.current && (cacheGithubRes.current[queryParams.language] || []);
-        if (queryParams.page === 1 && cache && cache.length > 0) {
-          setHotGithubRes(cache);
-        } else {
-          await getHotGithubRes(queryParams.language, queryParams.page);
-          setLoading(false);
-        }
-      }
-      fetchData();
-    }, [queryParams]);
     return (
       <>
           <Nav
@@ -86,6 +82,7 @@ export default function Home() {
             error={error}
           />
           <List
+            error={error}
             load={loading}
             items={hotGithubRes}
             total={total}
