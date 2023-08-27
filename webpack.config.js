@@ -32,9 +32,22 @@ module.exports = {
         use: 'ts-loader',
         exclude: /node_modules/ // 排除 node_module 下的 ts 文件
       },
-      { // 添加 rule
+      {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true, // 启用 CSS modules
+            },
+          },
+          "less-loader"
+        ],
+      },
+      {
+        test: /\.less$/,
+        use: ["style-loader", "css-loader", "less-loader"],
       },
       {
         test: /\.css$/,
