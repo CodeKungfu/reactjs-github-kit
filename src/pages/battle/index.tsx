@@ -18,12 +18,12 @@ export default function Battle() {
                 <h3 className="text-xl text-center mb-6">Players</h3>
                 <div className="flex items-center justify-between mx-10">
                     <div className="flex-1 w-[50%] mr-10">
-                        <BattleUser title="Play One" onSubmitUser={(user, userData) => {
+                        <BattleUser title="Play One" onSubmitUser={(user) => {
                             setGithubUserOne(user);
                         }} />
                     </div>
                     <div className="flex-1 w-[50%]">
-                        <BattleUser title="Play Two" onSubmitUser={(user, userData) => {
+                        <BattleUser title="Play Two" onSubmitUser={(user) => {
                             setGithubUserTwo(user);
                         }} />
                     </div>

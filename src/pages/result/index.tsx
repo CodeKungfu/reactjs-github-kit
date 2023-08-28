@@ -87,5 +87,4 @@ export default function Result() {
       <button onClick={handleReset} className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">reset</button>
     </div>
   );
-};
-
+}
