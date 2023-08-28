@@ -15,19 +15,18 @@ const Layout = () => {
     return (
       <div className="mx-8 px-4 flex flex-col h-screen">
         <div className="py-4">
-          <a
+          <button
             className={`mr-4 ${!isBattlePage ? 'text-orange-500' : ''}`}
             onClick={() => navigate('/')}
           >
             Home
-          </a>
-          <a
-            href='/battle'
+          </button>
+          <button
             className={`mr-4 ${isBattlePage ? 'text-orange-500' : ''}`}
             onClick={goBattle}
           >
             Battle
-          </a>
+          </button>
         </div>
         <div className="h-full flex-auto">
           <Outlet />
