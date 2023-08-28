@@ -1,32 +1,23 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
+import useIntersectionObserver from "@/hooks/useIntersectionObserver";
+
 export function LazyLoadWithSrcSet({url, srcset}) {
-    const [isIntersecting, setIsIntersecting] = useState(false);
-    const imgRef = useRef();
-    const handleIntersection = (entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting) {
-            setIsIntersecting(entry.isIntersecting);
-        }
-    };
-    useEffect(() => {
-        const observer = new IntersectionObserver(handleIntersection);
-        if (imgRef.current) {
-            observer.observe(imgRef.current);
-        }
-        return () => {
+    const imgRef = useRef<HTMLImageElement | null>();
+    useIntersectionObserver({
+        target: imgRef,
+        onIntersect: () => {
             if (imgRef.current) {
-                observer.unobserve(imgRef.current);
+                imgRef.current.src = url;
+                imgRef.current.srcset = srcset;
             }
-        };
-    }, []);
+        },
+    });
     return (
         <img
             ref={imgRef}
             width="100"
             height="100"
             alt=""
-            src={isIntersecting ? url : ''}
-            srcSet={isIntersecting ? srcset : ''}
             className="w-[60%] mx-auto"
         />
     );

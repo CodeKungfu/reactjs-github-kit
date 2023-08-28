@@ -7,7 +7,10 @@ function getSrcset(url) {
     const xl2 = `${url}&s=400 1536w`;
     return `${sm}, ${md}, ${lg}, ${xl}, ${xl2}`;
 }
-export function Avatar(props) {
+interface Props {
+    url: string;
+}
+export function Avatar(props: Props) {
     const url = props.url;
     const srcset = getSrcset(url);
 
