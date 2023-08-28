@@ -58,7 +58,7 @@ export default function Result() {
   if (!githubUserOne || !githubUserTwo) {
     return (
       <div className="py-4 h-full flex flex-col items-center">
-        <h1 className="pb-4">用户信息不足</h1>
+        <h1 className="pb-4">Battle计算无法完成，因为用户输入有误</h1>
         <button onClick={handleReset} className="bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">reset</button>
       </div>
     );
