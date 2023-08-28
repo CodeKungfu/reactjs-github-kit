@@ -10,14 +10,6 @@ const Layout = () => {
   
     const isBattlePage = pathname.includes("/battle") || pathname.includes("/result");
     const goBattle = () => {
-        const userOne = localStorage.getItem('battle-userOne');
-        const userTwo = localStorage.getItem('battle-userTwo');
-        if (userOne)
-            localStorage.removeItem(`${userOne}`);
-            localStorage.removeItem('battle-userOne');
-        if (userTwo)
-            localStorage.removeItem(`${userTwo}`);
-            localStorage.removeItem('battle-userTwo');
         navigate('/battle');
     };
     return (

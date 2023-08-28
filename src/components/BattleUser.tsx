@@ -37,7 +37,6 @@ export function BattleUser({ title, onSubmitUser }) {
         axios.get(`https://api.github.com/users/${username}`)
             .then(data => {
                 console.log(data);
-                localStorage.setItem(`${username}`, JSON.stringify(data.data)); // 存储数据
                 setIsChecked(true);
                 onSubmitUser(username, data.data);
             }).catch((error) => {
