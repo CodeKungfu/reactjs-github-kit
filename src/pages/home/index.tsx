@@ -27,7 +27,7 @@ export default function Home() {
         setHotGithubRes([]);
         getGithubData(language, 1);
       }
-      window.history.replaceState({}, "", `index.html?language=${language}`);
+      window.history.replaceState({}, "", `?language=${language}`);
     };
 
     useEffect(() => {

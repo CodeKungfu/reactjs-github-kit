@@ -34,6 +34,8 @@ export default function Battle() {
         if (githubUserOne && githubUserTwo) {
             setShowBattleResult(true);
             window.history.replaceState({}, "", `?userOne=${githubUserOne}&userTwo=${githubUserTwo}`);
+            localStorage.setItem('battle-userOne', `${githubUserOne}`);
+            localStorage.setItem('battle-userTwo', `${githubUserTwo}`);
         }
     }, [githubUserOne, githubUserTwo]);
 
