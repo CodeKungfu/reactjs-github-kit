@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Instructions } from "@/components/Instructions";
 import { BattleUser } from "@/components/BattleUser";
 import { UserCard } from "@/components/UserCard";
 import { isTwoUser, getTwoUserInfo } from "@/utils/index";
 export default function Battle() {
+    const navigate = useNavigate();
     const twoUserInfo = getTwoUserInfo();
     const [githubUserOne, setGithubUserOne] = useState<string>(twoUserInfo.userOne || '');
     const [githubUserTwo, setGithubUserTwo] = useState<string>(twoUserInfo.userTwo || '');
@@ -32,10 +34,11 @@ export default function Battle() {
     }, []);
     useEffect(() => {
         if (githubUserOne && githubUserTwo) {
-            setShowBattleResult(true);
-            window.history.replaceState({}, "", `?userOne=${githubUserOne}&userTwo=${githubUserTwo}`);
-            localStorage.setItem('battle-userOne', `${githubUserOne}`);
-            localStorage.setItem('battle-userTwo', `${githubUserTwo}`);
+            navigate(`/result?userOne=${githubUserOne}&userTwo=${githubUserTwo}`);
+            // setShowBattleResult(true);
+            // window.history.replaceState({}, "", `?userOne=${githubUserOne}&userTwo=${githubUserTwo}`);
+            // localStorage.setItem('battle-userOne', `${githubUserOne}`);
+            // localStorage.setItem('battle-userTwo', `${githubUserTwo}`);
         }
     }, [githubUserOne, githubUserTwo]);
 
@@ -45,7 +48,7 @@ export default function Battle() {
             < Instructions />
             <div className="w-full mt-20">
                 <h3 className="text-xl text-center mb-6">Players</h3>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between mx-10">
                     <div className="flex-1 w-[50%] mr-10">
                         <BattleUser title="Play One" onSubmitUser={(user, userData) => {
                             setUserOneData(userData);

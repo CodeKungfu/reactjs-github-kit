@@ -21,6 +21,13 @@ export function isTwoUser() {
     return false;
 }
 
+export const getTwoUserName = () => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const githubUserOne = searchParams.get("userOne") || "";
+    const githubUserTwo = searchParams.get("userTwo") || "";
+    return { githubUserOne, githubUserTwo };
+};
+
 export function getTwoUserInfo() {
     const userOne = new URLSearchParams(window.location.search).get('userOne') || '';
     const userTwo = new URLSearchParams(window.location.search).get('userTwo') || '';

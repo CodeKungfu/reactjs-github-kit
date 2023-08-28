@@ -1,10 +1,14 @@
-import { Suspense, lazy } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-const Home = lazy(() => import(/*webpackChunkName: 'home-page' */ '@/pages/home/index'));
-const Battle = lazy(() => import(/*webpackChunkName: 'battle-page' */ '@/pages/battle/index'));
+import React from 'react';
+import { BrowserRouter, Outlet, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+const Home = React.lazy(() => import(/*webpackChunkName: 'home-page' */ '@/pages/home/index'));
+const Battle = React.lazy(() => import(/*webpackChunkName: 'battle-page' */ '@/pages/battle/index'));
+const Result = React.lazy(() => import(/*webpackChunkName: 'result-page' */ '@/pages/result/index'));
 
-export default function App() {
-    const isHome = !(window.location.href.lastIndexOf('/battle') > -1);
+const Layout = () => {
+    const navigate = useNavigate();
+    const { pathname } = useLocation();
+  
+    const isBattlePage = pathname.includes("/battle") || pathname.includes("/result");
     const goBattle = () => {
         const userOne = localStorage.getItem('battle-userOne');
         const userTwo = localStorage.getItem('battle-userTwo');
@@ -14,19 +18,46 @@ export default function App() {
         if (userTwo)
             localStorage.removeItem(`${userTwo}`);
             localStorage.removeItem('battle-userTwo');
-    }
+        navigate('/battle');
+    };
     return (
-        <BrowserRouter basename="/reactjs-github-kit">
-            <Suspense fallback={<></>}>
-                <div className='py-3'>
-                    <a href="/" className={`mx-8 ${ isHome ? "text-orange-500" : ""}`}>Home</a>
-                    <a href="/battle" onClick={goBattle} className={`mx-8 ${!isHome ? "text-orange-500" : ""}`}>Battle</a>
-                </div>
+      <div className="mx-8 px-4 flex flex-col h-screen">
+        <div className="py-4">
+          <a
+            className={`mr-4 ${!isBattlePage ? 'text-orange-500' : ''}`}
+            onClick={() => navigate('/')}
+          >
+            Home
+          </a>
+          <a
+            href='/battle'
+            className={`mr-4 ${isBattlePage ? 'text-orange-500' : ''}`}
+            onClick={goBattle}
+          >
+            Battle
+          </a>
+        </div>
+        <div className="h-full flex-auto">
+          <Outlet />
+        </div>
+      </div>
+    );
+  }
+
+export default function App() {
+    return (
+        // <BrowserRouter basename="/reactjs-github-kit"></BrowserRouter>
+        <BrowserRouter>
+            <React.Suspense fallback={<></>}>
                 <Routes>
+                <Route path="/" element={<Layout />}>
                     <Route path="/" element={<Home />} />
                     <Route path="/battle" element={<Battle />} />
+                    <Route path="/result" element={<Result />} />
+                </Route>
+                    
                 </Routes>
-            </Suspense>
+            </React.Suspense>
         </BrowserRouter>
     )
 }
