@@ -5,7 +5,7 @@ const Battle = lazy(() => import(/*webpackChunkName: 'battle-page' */ '@/pages/b
 
 export default function App() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="/reactjs-github-kit">
             <Suspense fallback={<></>}>
                 <div className='py-3'>
                     <Link to="/" className='mx-8'>Home</Link>

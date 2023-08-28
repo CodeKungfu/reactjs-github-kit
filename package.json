@@ -12,6 +12,7 @@
     "predeploy": "npm run build",
     "deploy": "./node_modules/gh-pages/bin/gh-pages-clean.js && gh-pages -d dist"
   },
+  "homepage": "https://codekungfu.github.io/reactjs-github-kit",
   "author": "",
   "license": "ISC",
   "devDependencies": {
